@@ -1,0 +1,48 @@
+{
+  "name": "blog-post-workflow",
+  "version": "1.8.8",
+  "description": "Allows you to show your latest blog posts on your github profile or project readme",
+  "main": "blog-post-workflow.js",
+  "scripts": {
+    "build": "esbuild ./src/blog-post-workflow.js  --bundle --platform=node --outfile=dist/blog-post-workflow.js",
+    "lint": "jshint --exclude='node_modules/' *.js",
+    "start-server": "node test/testUtils/test-server.js",
+    "local-run-script": "node local-run.js",
+    "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
+    "test-run": "mocha --parallel --reporter json --reporter-option output=src-report.json --jobs 100 test/**.js",
+    "test": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run",
+    "test-run-dist": "DIST=true mocha --parallel --reporter json --reporter-option output=dist-report.json --jobs 100 test/**.js",
+    "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gautamkrishnar/blog-post-workflow.git"
+  },
+  "keywords": [
+    "github",
+    "workflow",
+    "blog",
+    "posts"
+  ],
+  "author": "Gautam krishna R <r.gautamkrishna@gmail.com> (https://www.github.com/gautamkrishnar)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/gautamkrishnar/blog-post-workflow/issues"
+  },
+  "homepage": "https://github.com/gautamkrishnar/blog-post-workflow#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "dateformat": "^3.0.3",
+    "esbuild": "^0.21.3",
+    "keepalive-workflow": "^2.0.4",
+    "process": "latest",
+    "promise-retry": "^2.0.1",
+    "random-seed": "^0.3.0",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.12.0",
+    "mocha": "^10.2.0",
+    "start-server-and-test": "^2.0.4"
+  }
+}
